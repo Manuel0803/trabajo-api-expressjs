@@ -9,6 +9,11 @@ if (!Number.isInteger(PORT) || PORT <= 0 || PORT > 65535) {
 const app = createApp();
 
 app.listen(PORT, () => {
-  console.log(`Servidor disponible en http://localhost:${PORT}`);
-  console.log(`Documentación Swagger en http://localhost:${PORT}/api/docs`);
+  console.log(JSON.stringify({
+    timestamp: new Date().toISOString(),
+    level: 'info',
+    message: 'Servidor iniciado correctamente',
+    port: PORT,
+    docsUrl: `http://localhost:${PORT}/api/docs`
+  }));
 });

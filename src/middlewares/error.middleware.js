@@ -13,7 +13,13 @@ export const errorHandler = (err, req, res, next) => {
   const safeStatus = status >= 400 && status < 600 ? status : 500;
 
   if (safeStatus >= 500) {
-    console.error(err);
+    console.error(JSON.stringify({
+      timestamp: new Date().toISOString(),
+      level: 'error',
+      statusCode: safeStatus,
+      message: err.message,
+      stack: err.stack
+    }));
   }
 
   res.status(safeStatus).json({
